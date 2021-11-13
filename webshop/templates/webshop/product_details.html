@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% block zawartosc %}
+
+
+
+
+    <main class="container my-4 bg-white p-2 rounded-3 shadow-lg px-xxl-5 mt-xl-2">
+        <div class="d-flex justify-content-between border-bottom m-3">
+            <div class="ms-3">
+                <h3>{{ object.name }}</h3>
+            </div>
+            <div class="me-3">
+                <h4><a class="text-decoration-none text-reset class" href="" id="refURL">BACK</a></h4>
+            </div>
+        </div>
+        <div class="row p-3">
+            <div class="col-md-4">
+                <img src="/media/{{ object.image }}" class="card-img-top" alt="{{ object.name }}">
+            </div>
+            <div class="col-md-8">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>Price</th>
+                        <th>$ <span
+                                class="product-price-{{ data.id }}">{{ object.price }}</span>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>Availability</th>
+                        {% if object.availability is False %}
+                            <td><span style="color: red;"><i class="fas fa-times-circle"></i></span></td>
+                        {% elif object.availability is True %}
+                            <td><span style="color: green;"><i class="fas fa-check-circle"></i></span></td>
+                        {% endif %}
+                    </tr>
+                    <tr>
+                        <th>Manufacturer</th>
+                        <td><a class="text-decoration-none text-reset class"
+                               href="/brand-product-list/{{ data.brand.id }}">{{ object.manufacturer }}</a></td>
+                    </tr>
+                    <tr>
+                        <th>Category</th>
+                        <td><a class="text-decoration-none text-reset class"
+                               href="/category-product-list/{{ data.category.id }}">{{ object.category }}</a></td>
+                    </tr>
+                    <tr>
+                        <th>Product code</th>
+                        <td>{{ object.id }}</td>
+                    </tr>
+                    <tr>
+                        <th>Additional details</th>
+                        <td>{{ object.details }}</td>
+                    </tr>
+                </table>
+                <hr/>
+                <div class="input-group my-3" style="width:30%;">
+                    <input type="number" value="1" class="form-control product-qty-{{ object.id }}" id="productQty"/>
+                    <div class="input-group-append">
+                        {% if object.availability is False %}
+                            <button class="btn btn-secondary btn-md add-to-cart" data-index="{{ object.id }}"
+                                    type="button"
+                                    id="addToCartBtn" disabled><i class="fa fa-shopping-cart"></i> Add to Cart
+                            </button>
+                        {% elif object.availability is True %}
+                            <button class="btn btn-primary btn-md add-to-cart" data-index="{{ object.id }}" type="button"
+                                    id="addToCartBtn"><i class="fa fa-shopping-cart"></i> Add to Cart
+                            </button>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+{% endblock %}
+{% block javascript %}
+    <script type="text/javascript">
+        let refURL = document.referrer;
+        let target = document.querySelector("#refURL");
+        target.href = refURL
+    </script>
+    <script>
+        $(document).on('click', ".add-to-cart", function () {
+            let item = this;
+            let item_id = item.getAttribute('data-index');
+            let qty = $(".product-qty-" + item_id).val();
+            $.ajax({
+                data: {item_id, qty},
+                url: "{% url 'add-to-cart' %}",
+                dataType: 'json',
+                success: function (response) {
+                    $(".cart-list").text(response.totalitems);
+                    console.log(response.data);
+                }
+            });
+            return false;
+        });
+    </script>
+{% endblock %}

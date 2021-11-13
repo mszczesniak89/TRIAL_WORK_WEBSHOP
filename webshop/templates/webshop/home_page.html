@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block zawartosc %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="d-flex justify-content-center">
+                    <div id="home1" class="bg-light p-2 rounded-3 shadow-lg px-xxl-5 mt-xl-5"
+                         style="--bs-bg-opacity: .7;">
+                        <div class="card-body text-center">
+                            <h2 class="home card-title">Welcome!</h2>
+                            <h2 class="home card-text">Feel free to have a look around.</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col">
+                <div id="home2" class="d-flex justify-content-center">
+                        <a href="{% url 'main-page' %}">
+                    <button type="button" class="btn-lg px-xxl-5 mt-xl-2 shadow-lg glow-on-hover">
+                        Let's go!
+                    </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col">
+                <div class="d-flex justify-content-center">
+                    <div id="home3" class="bg-light p-2 rounded-3 shadow-lg px-xxl-5 mt-xl-2"
+                         style="--bs-bg-opacity: .7;">
+                        <div class="card-body text-center">
+                            <h2 class="home card-title">This is a test WebShop.</h2>
+
+                            <h4 class="home card-text">
+                                This project is primarily Django-based.
+                            </h4>
+                            <h4 class="home card-text">With a pinch of JavaScript.</h4>
+                            <h4 class="home card-text">And a sliver of AJAX.</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascript %}
+
+{% endblock %}

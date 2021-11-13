@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block zawartosc %}
+
+    <div class="container h-100">
+        <div class="d-flex justify-content-center h-100">
+            <div class="user_card">
+                <div class="d-flex justify-content-center">
+
+
+                    <h2 id="form-title">LOGIN</h2>
+                </div>
+                <div class="d-flex justify-content-center form_container">
+                    <form method="POST" action="">
+                        {% csrf_token %}
+                        <div class="input-group mb-3">
+                            <div class="input-group-append">
+                                <span class="btn btn-dark btn-social mx-2"><i class="fas fa-user"></i></span>
+                            </div>
+                            {{ form.username }}
+                        </div>
+                        <div class="input-group mb-2">
+                            <div class="input-group-append">
+                                <span class="btn btn-dark btn-social mx-2"><i class="fas fa-key"></i></span>
+                            </div>
+                            {{ form.password }}
+                        </div>
+                        {{ form.captcha }}
+
+                        <div class="d-flex justify-content-center mt-3 login_container">
+                            <input class="btn login_btn" style="color:#424242; font-family:'Mohave';" type="submit"
+                                   value="Login">
+                        </div>
+                    </form>
+
+                </div>
+                {{ form.errors }}
+
+                <div class="mt-4">
+                    <div class="d-flex justify-content-center links">
+                        Don't have an account?
+                    </div>
+                    <div class="d-flex justify-content-center links">
+                        <a href="{% url 'signup' %}" class="ml-5">Sign Up</a>
+                    </div>
+                    <div class="mt-1">
+                        <div class="d-flex justify-content-center links">
+                            Forgot your password?
+                        </div>
+                        <div class="d-flex justify-content-center links">
+                            <a href="{% url 'password_reset' %}" class="ml-5">Reset password</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

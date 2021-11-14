@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% block zawartosc %}
+
+
+
+
+    <main class="container my-4 bg-white p-2 rounded-3 shadow-lg px-xxl-5 mt-xl-2">
+        <form method="post" action="">
+            {% csrf_token %}
+            <div class="d-flex justify-content-between border-bottom m-3">
+                <div class="ms-3">
+                    <h3>{{ form.name }}</h3>
+                </div>
+                <div class="me-3">
+                    <h4><a class="text-decoration-none text-reset class" href="" id="refURL">BACK</a></h4>
+                </div>
+            </div>
+            <div class="row p-3">
+                <div class="col-md-4">
+                    <img src="/media/{{ object.image }}" class="card-img-top" alt="{{ object.name }}">
+                    {{ form.image }}
+                </div>
+                <div class="col-md-8">
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>Price</th>
+                            <th>$ <span
+                                    class="product-price-{{ data.id }}">{{ form.price }}</span>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>Availability</th>
+                            <td>{{ form.availability }}</td>
+                        </tr>
+                        <tr>
+                            <th>Manufacturer</th>
+                            <td><a class="text-decoration-none text-reset class"
+                                   href="/brand-product-list/{{ data.brand.id }}">{{ form.manufacturer }}</a></td>
+                        </tr>
+                        <tr>
+                            <th>Category</th>
+                            <td><a class="text-decoration-none text-reset class"
+                                   href="/category-product-list/{{ data.category.id }}">{{ form.category }}</a></td>
+                        </tr>
+                        <tr>
+                            <th>Product code</th>
+                            <td>{{ object.id }}</td>
+                        </tr>
+                        <tr>
+                            <th>Slug</th>
+                            <td>{{ form.slug }}</td>
+                        </tr>
+                        <tr>
+                            <th>Additional details</th>
+                            <td>{{ form.details }}</td>
+                        </tr>
+                    </table>
+                    <hr/>
+                    <button class="btn btn-success btn-md" data-index="{{ object.id }}" type="submit" value="SUBMIT"
+                    ><i class="fas fa-save"></i> Save changes
+                    </button>
+                    <a href="{% url 'admin-delete-product' object.id %}">
+                        <button class="btn btn-md btn-danger" type="button"><i class="fa fa-trash"></i> Delete product
+                        </button>
+                    </a>
+                    {{ form.errors }}
+                </div>
+            </div>
+        </form>
+    </main>
+
+{% endblock %}
+{% block javascript %}
+    <script type="text/javascript">
+        let refURL = document.referrer;
+        let target = document.querySelector("#refURL");
+        target.href = refURL
+    </script>
+{% endblock %}

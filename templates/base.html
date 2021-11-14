@@ -40,13 +40,19 @@
 
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0 me-3">
                 <li class="nav-item">
-                    <a class="nav-link text-uppercase" href=""><h3 class="menu">Home</h3></a>
+                    <a class="nav-link text-uppercase" href="{% url 'home-page' %}"><h3 class="menu">Home</h3></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-uppercase" href=""><h3 class="menu">About</h3></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-uppercase" href=""><h3 class="menu">Contact</h3></a>
+                </li>
+                {% if user.is_staff %}
+                <li class="nav-item">
+                    <a class="nav-link text-uppercase" href="{% url 'admin-products' %}"><h3 class="menu">Admin</h3>
+                    </a>
+                {% endif %}
                 </li>
                 {% if not user.is_authenticated %}
                     <li class="nav-item">

@@ -18,7 +18,7 @@ from django.conf import settings
 from django.urls import path, include
 from django.conf.urls.static import static
 from webshop.views import HomePageView, MainShopView, ProductDetailsView, add_to_cart, shopping_cart_list, \
-    delete_cart_item, update_cart_item, AddProductView
+    delete_cart_item, update_cart_item, AddProductView, AdminProductView, AdminDeleteProduct, AdminEditProduct
 
 
 urlpatterns = [
@@ -27,6 +27,9 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('', HomePageView.as_view(), name='home-page'),
     path('main', MainShopView.as_view(), name='main-page'),
+    path('admin_products/', AdminProductView.as_view(), name='admin-products'),
+    path('admin_delete_product/<int:pk>/', AdminDeleteProduct.as_view(), name='admin-delete-product'),
+    path('admin_edit_product/<int:pk>/', AdminEditProduct.as_view(), name='admin-edit-product'),
     path('product/<int:pk>/', ProductDetailsView.as_view(), name='product-details'),
     path('add-product/', AddProductView.as_view(), name='add-product'),
     path('add-to-cart', add_to_cart, name='add-to-cart'),

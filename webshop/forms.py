@@ -9,6 +9,9 @@ class AddProductForm(forms.ModelForm):
     class Meta:
         model = Product
         fields = '__all__'
+        widgets = {
+            'details': forms.Textarea(attrs={'rows': 3, 'cols': 20})
+        }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

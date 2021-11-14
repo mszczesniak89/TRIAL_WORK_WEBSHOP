@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% block zawartosc %}
+
+
+    <main class="container d-flex justify-content-between my-4 bg-light p-2 rounded-3 shadow-lg px-xxl-5 mt-xl-2"
+          style="--bs-bg-opacity: .8;">
+        <form action="" method="get">
+            <div class="ms-3">
+                <h5>
+                    {{ filter.form.q }}
+                    <button type="submit" class="btn btn-outline-secondary" style="font-family:'Mohave';">
+                        Search
+                    </button>
+                </h5>
+            </div>
+        </form>
+        <form action="" method="get">
+            <div class="me-3">
+
+                <h5>
+                    {{ filter.form.o }}
+                    <button type="submit" class="btn btn-outline-secondary" style="font-family:'Mohave';">
+                        Sort
+                    </button>
+                </h5>
+            </div>
+        </form>
+    </main>
+
+    <main class="container my-4 bg-light p-2 rounded-3 shadow-lg px-xxl-5 mt-xl-2" style="--bs-bg-opacity: .8;">
+        <h3 class="my-4 border-bottom pb-1">All products</h3>
+        <div class="row">
+            {% if object_list %}
+                {% for item in object_list %}
+                    <div class="col-lg-3 mb-4 product-box">
+                        <div class="card shadow">
+                            <a href="{% url 'admin-edit-product' item.id %}"><img
+                                    src="/media/{{ item.image }}" class="card-img-top product-img"
+                                    alt="{{ item.name }}"></a>
+                            <div class="card-body">
+                                <h5 class="card-text"><a class="text-decoration-none text-reset class"
+                                                         href="{% url 'admin-edit-product' item.id %}">{{ item.name }}</a>
+                                </h5>
+                                <h6>$ <span class="product-price-{{ product.id }}">{{ item.price }}</span>
+                                </h6>
+                            </div>
+                            <div class="card-footer">
+                                <a href="{% url 'admin-edit-product' item.id %}">
+                                    <button class="btn btn-sm btn-success"><i class="fas fa-edit"></i> Edit product
+                                    </button>
+                                </a>
+                                <a href="{% url 'admin-delete-product' item.id %}">
+                                    <button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Delete product
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <h3 class="my-4 pb-1">No products found!</h3>
+
+            {% endif %}
+        </div>
+    </main>
+
+
+{% endblock %}
+
+{% block javascript %}
+    <script>
+        $(document).on('click', ".add-to-cart", function () {
+            let item = this;
+            let item_id = item.getAttribute('data-index');
+            let qty = $(".product-qty-" + item_id).val();
+            $.ajax({
+                data: {item_id, qty},
+                url: "{% url 'add-to-cart' %}",
+                dataType: 'json',
+                beforeSend: function () {
+                    item.disabled = true;
+                },
+                success: function (response) {
+                    $(".cart-list").text(response.totalitems);
+                    item.disabled = false;
+                    console.log(response.data);
+                }
+            });
+            return false;
+        });
+    </script>
+{% endblock %}

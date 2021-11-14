@@ -1,4 +1,4 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.forms import model_to_dict
 from django.http import JsonResponse
 from django.shortcuts import render
@@ -6,7 +6,7 @@ from django.shortcuts import render
 from django.template.loader import render_to_string
 from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import DetailView, ListView, CreateView
+from django.views.generic import DetailView, ListView, CreateView, DeleteView, UpdateView
 from django_filters.views import FilterView
 from webshop.models import Product, ShoppingCart, ShoppingCartItems
 from webshop.filters import ProductFilter
@@ -41,6 +41,42 @@ class AddProductView(LoginRequiredMixin, CreateView):
 
     def get_success_url(self):
         return reverse_lazy('main-page')
+
+
+class AdminProductView(UserPassesTestMixin, FilterView):
+    def get_queryset(self):
+        return Product.objects.all()
+
+    model = Product
+    context_object_name = 'object_list'
+    filterset_class = ProductFilter
+    template_name = 'webshop/admin_products.html'
+
+    def test_func(self):
+        return self.request.user.is_staff
+
+
+class AdminEditProduct(UserPassesTestMixin, UpdateView):
+    model = Product
+    template_name = 'webshop/edit_product.html'
+    form_class = AddProductForm
+
+    def get_success_url(self):
+        return reverse_lazy('admin-products')
+
+    def test_func(self):
+        return self.request.user.is_staff
+
+
+class AdminDeleteProduct(UserPassesTestMixin, DeleteView):
+    model = Product
+    template_name = 'webshop/delete_form.html'
+
+    def get_success_url(self):
+        return reverse_lazy('admin-products')
+
+    def test_func(self):
+        return self.request.user.is_staff
 
 
 def add_to_cart(request):

@@ -1,13 +1,16 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.forms import model_to_dict
 from django.http import JsonResponse
 from django.shortcuts import render
 # Create your views here.
 from django.template.loader import render_to_string
+from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import DetailView, ListView
+from django.views.generic import DetailView, ListView, CreateView
 from django_filters.views import FilterView
 from webshop.models import Product, ShoppingCart, ShoppingCartItems
 from webshop.filters import ProductFilter
+from webshop.forms import AddProductForm
 
 
 class HomePageView(View):
@@ -29,6 +32,15 @@ class MainShopView(FilterView):
 class ProductDetailsView(DetailView):
     model = Product
     template_name = 'webshop/product_details.html'
+
+
+class AddProductView(LoginRequiredMixin, CreateView):
+    model = Product
+    form_class = AddProductForm
+    template_name = 'webshop/add_product.html'
+
+    def get_success_url(self):
+        return reverse_lazy('main-page')
 
 
 def add_to_cart(request):

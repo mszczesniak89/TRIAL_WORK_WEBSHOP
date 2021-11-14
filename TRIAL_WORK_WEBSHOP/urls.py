@@ -18,7 +18,7 @@ from django.conf import settings
 from django.urls import path, include
 from django.conf.urls.static import static
 from webshop.views import HomePageView, MainShopView, ProductDetailsView, add_to_cart, shopping_cart_list, \
-    delete_cart_item
+    delete_cart_item, update_cart_item
 
 
 urlpatterns = [
@@ -29,6 +29,7 @@ urlpatterns = [
     path('main', MainShopView.as_view(), name='main-page'),
     path('product/<int:pk>/', ProductDetailsView.as_view(), name='product-details'),
     path('add-to-cart', add_to_cart, name='add-to-cart'),
+    path('update-cart', update_cart_item, name='update-cart'),
     path('delete-from-cart', delete_cart_item, name='delete-from-cart'),
     path('shopping_cart', shopping_cart_list, name='shopping-cart'),
 ]

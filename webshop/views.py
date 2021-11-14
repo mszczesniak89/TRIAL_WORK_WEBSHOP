@@ -3,7 +3,7 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.views import View
-from django.views.generic import DetailView
+from django.views.generic import DetailView, ListView
 from django_filters.views import FilterView
 from webshop.models import Product, ShoppingCart, ShoppingCartItems
 from webshop.filters import ProductFilter
@@ -49,3 +49,30 @@ def add_to_cart(request):
     else:
         request.session['cartdata'] = cart_p
     return JsonResponse({'data': request.session['cartdata'], 'totalitems': len(request.session['cartdata'])})
+
+
+def shopping_cart_list(request):
+    total_amt = 0
+    object_list = {}
+    if 'cartdata' in request.session:
+        render_cart = request.session['cartdata']
+        for p_id, item in render_cart.items():
+            item['product'] = Product.objects.get(id=p_id)
+            total_amt += int(item['qty']) * float(item['product'].price)
+        return render(request, 'webshop/cart.html',
+                      {'cart_data': request.session['cartdata'], 'totalitems': len(request.session['cartdata']),
+                       'total_amt': total_amt})
+    else:
+        return render(request, 'webshop/cart.html', {'cart_data': '', 'totalitems': 0, 'total_amt': total_amt})
+
+
+
+
+
+
+
+
+
+
+
+

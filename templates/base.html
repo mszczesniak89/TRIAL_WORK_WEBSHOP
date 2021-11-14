@@ -62,7 +62,7 @@
                     </li>
                 {% endif %}
                 <li  class="nav-item">
-                     <a class="nav-link" href="">
+                     <a class="nav-link" href="{% url 'shopping-cart' %}">
                          <h3 class="menu">
                     <i class="fas fa-shopping-cart fa-md"></i>
                          (<span class="cart-list">{{request.session.cartdata|length}}</span>)

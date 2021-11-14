@@ -38,7 +38,7 @@ def add_to_cart(request):
     if 'cartdata' in request.session:
         if str(request.GET['item_id']) in request.session['cartdata']:
             cart_data = request.session['cartdata']
-            cart_data[str(request.GET['item_id'])]['qty'] = cart_data[str(request.GET['item_id'])]['qty'] + int(
+            cart_data[str(request.GET['item_id'])]['qty'] = int(cart_data[str(request.GET['item_id'])]['qty']) + int(
                 cart_p[str(request.GET['item_id'])]['qty'])
             cart_data.update(cart_data)
             request.session['cartdata'] = cart_data

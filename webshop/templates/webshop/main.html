@@ -82,8 +82,12 @@
                 data: {item_id, qty},
                 url: "{% url 'add-to-cart' %}",
                 dataType: 'json',
+                beforeSend:function(){
+                    item.disabled = true;
+                },
                 success: function (response) {
                     $(".cart-list").text(response.totalitems);
+                    item.disabled = false;
                     console.log(response.data);
                 }
             });

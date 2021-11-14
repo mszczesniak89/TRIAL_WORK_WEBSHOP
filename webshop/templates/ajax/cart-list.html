@@ -1,8 +1,4 @@
-{% extends 'base.html' %}
-{% block zawartosc %}
-
-    <main class="container my-4 bg-white p-2 rounded-3 shadow-lg px-xxl-5 mt-xl-2" id="cartList">
-        <div class="d-flex justify-content-between border-bottom m-3">
+  <div class="d-flex justify-content-between border-bottom m-3">
             <div class="ms-3">
                 <h3>Shopping Cart ({{ totalitems }})</h3>
             </div>
@@ -56,36 +52,3 @@
             {% endif %}
             </tfoot>
         </table>
-    </main>
-
-{% endblock %}
-
-{% block javascript %}
-    <script type="text/javascript">
-        let refURL = document.referrer;
-        let target = document.querySelector("#refURL");
-        target.href = refURL
-    </script>
-    <script>
-        $(document).on('click', '.delete-item', function () {
-            let item = this;
-            let product_id = item.getAttribute('data-item');
-            $.ajax({
-                url: "{% url 'delete-from-cart' %}",
-                data: {
-                    'id': product_id,
-                },
-                dataType: 'json',
-                beforeSend: function () {
-                    item.disabled = true;
-                },
-                success: function (res) {
-                    $(".cart-list").text(res.totalitems);
-                    item.disabled = false;
-                    console.log(res);
-                    $("#cartList").html(res.data);
-                }
-            });
-        });
-    </script>
-{% endblock %}

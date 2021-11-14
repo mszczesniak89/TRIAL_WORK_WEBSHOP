@@ -42,8 +42,7 @@
                     </form>
                 </div>
                 <div class="d-flex justify-content-center mt-3">
-                    <a class="nav-item nav-link p-0" href="">
-                        <h6>BACK</h6>
+                    <a class="text-decoration-none text-reset class" href="" id="refURL">BACK</a>
                     </a>
                 </div>
                 {{ form.errors }}
@@ -56,6 +55,9 @@
 {% endblock %}
 
 {% block javascript %}
-
-
+    <script type="text/javascript">
+        let refURL = document.referrer;
+        let target = document.querySelector("#refURL");
+        target.href = refURL
+    </script>
 {% endblock %}

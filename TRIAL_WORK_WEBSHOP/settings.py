@@ -18,6 +18,8 @@ from decouple import config
 import django_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+from django.conf.global_settings import DATABASES
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -84,15 +86,15 @@ WSGI_APPLICATION = 'TRIAL_WORK_WEBSHOP.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': config('DB_NAME'),
-        'USER': config('DB_USER'),
-        'PASSWORD': config('DB_PASS'),
-        'HOST': config('DB_HOST'),
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': config('DB_NAME'),
+#         'USER': config('DB_USER'),
+#         'PASSWORD': config('DB_PASS'),
+#         'HOST': config('DB_HOST'),
+#     }
+# }
 
 
 # Password validation
@@ -153,7 +155,6 @@ RECAPTCHA_PRIVATE_KEY = config('RECAPTCHA_PRIVATE_KEY')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
 
 django_heroku.settings(locals())
+del DATABASES['default']['OPTIONS']['sslmode']

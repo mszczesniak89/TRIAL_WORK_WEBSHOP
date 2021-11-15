@@ -43,7 +43,7 @@
                     <a class="nav-link text-uppercase" href="{% url 'home-page' %}"><h3 class="menu">Home</h3></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-uppercase" href=""><h3 class="menu">About</h3></a>
+                    <a class="nav-link text-uppercase" href="{% url 'main-page' %}"><h3 class="menu">SHOP</h3></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-uppercase" href=""><h3 class="menu">Contact</h3></a>
@@ -60,7 +60,7 @@
                     </li>
                 {% else %}
                     <li class="nav-item">
-                        <a class="nav-link text-uppercase" href=""><h3 class="menu">My Account</h3>
+                        <a class="nav-link text-uppercase" href="{% url 'edit_user' %}"><h3 class="menu">My Account</h3>
                         </a>
                     </li>
                     <li class="nav-item">

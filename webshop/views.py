@@ -10,7 +10,7 @@ from django.views.generic import DetailView, ListView, CreateView, DeleteView, U
 from django_filters.views import FilterView
 from webshop.models import Product, ShoppingCart, ShoppingCartItems
 from webshop.filters import ProductFilter
-from webshop.forms import AddProductForm
+from webshop.forms import AddProductForm, EditProductForm
 
 
 class HomePageView(View):
@@ -37,10 +37,10 @@ class ProductDetailsView(DetailView):
 class AddProductView(LoginRequiredMixin, CreateView):
     model = Product
     form_class = AddProductForm
-    template_name = 'webshop/add_product.html'
+    template_name = 'webshop/add_product_2.html'
 
     def get_success_url(self):
-        return reverse_lazy('main-page')
+        return reverse_lazy('product-details', kwargs={'pk': self.object.id})
 
 
 class AdminProductView(UserPassesTestMixin, FilterView):
@@ -59,7 +59,7 @@ class AdminProductView(UserPassesTestMixin, FilterView):
 class AdminEditProduct(UserPassesTestMixin, UpdateView):
     model = Product
     template_name = 'webshop/edit_product.html'
-    form_class = AddProductForm
+    form_class = EditProductForm
 
     def get_success_url(self):
         return reverse_lazy('admin-products')

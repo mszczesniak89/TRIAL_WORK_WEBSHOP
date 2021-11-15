@@ -6,6 +6,7 @@ django-crispy-forms==1.13.0
 django-filter==21.1
 django-heroku==0.3.1
 django-recaptcha==2.0.6
+-e git+https://github.com/mszczesniak89/django-bootstrap-modal-forms.git@6383f67f923e64b7c1581bd5cbe6cd7ee8a547f3#egg=django_bootstrap_modal_forms
 gunicorn==20.1.0
 jsonpickle==2.0.0
 mysqlclient==2.0.3

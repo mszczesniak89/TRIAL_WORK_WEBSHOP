@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block zawartosc %}
+
 
 
 
@@ -38,13 +40,29 @@
                         </tr>
                         <tr>
                             <th>Manufacturer</th>
-                            <td><a class="text-decoration-none text-reset class"
-                                   href="/brand-product-list/{{ data.brand.id }}">{{ form.manufacturer }}</a></td>
+                            <td>
+                                <div class="input-group mb-1" id="manufacturer-div">
+                                    {{ form.manufacturer }}
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-dark" id="create-manufacturer"
+                                                type="button">
+                                            <i class="far fa-plus-square"></i></button>
+                                    </div>
+                                </div>
+                            </td>
                         </tr>
                         <tr>
                             <th>Category</th>
-                            <td><a class="text-decoration-none text-reset class"
-                                   href="/category-product-list/{{ data.category.id }}">{{ form.category }}</a></td>
+                            <td>
+                                <div class="input-group mb-1">
+                                    {{ form.category }}
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-dark" id="create-category"
+                                                type="button">
+                                            <i class="far fa-plus-square"></i></button>
+                                    </div>
+                                </div>
+                            </td>
                         </tr>
                         <tr>
                             <th>Slug</th>
@@ -65,11 +83,47 @@
         </form>
     </main>
 
+
 {% endblock %}
 {% block javascript %}
+
     <script type="text/javascript">
         let refURL = document.referrer;
         let target = document.querySelector("#refURL");
         target.href = refURL
     </script>
+    <script src="{% static 'js/jquery.bootstrap.modal.forms.js' %}"></script>
+    <script type="text/javascript">
+    $(function () {
+        let asyncSuccessMessage =
+          "<div "+
+          "style='position:fixed;top:0;z-index:10000;width:100%;border-radius:0;' "+
+          "class='alert alert-icon alert-success alert-dismissible fade show mb-0' role='alert'>"+
+          "Success: Book was updated."+
+          "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>"+
+          "<span aria-hidden='true'>&times;</span>"+
+          "</button>"+
+          "</div>"+
+          "<script>"+
+          "$('.alert').fadeTo(2000, 500).slideUp(500, function () {$('.alert').slideUp(500).remove();});"+
+          "<\/script>";
+        function AddManufacturerModal() {
+          $("#create-manufacturer").each(function () {
+            $(this).modalForm({
+              formURL: "{% url 'manufacturer-modal' %}",
+              asyncUpdate: true,
+              asyncSettings: {
+                closeOnSubmit: true,
+                successMessage: asyncSuccessMessage,
+                dataUrl: '{% url 'manufacturers' %}',
+                dataElementId: "#manufacturer-div",
+                dataKey: "table",
+                addModalFormFunction: AddManufacturerModal
+              }
+            });
+          });
+        }
+        AddManufacturerModal();
+    });
+</script>
 {% endblock %}

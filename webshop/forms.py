@@ -1,7 +1,8 @@
+from bootstrap_modal_forms.forms import BSModalModelForm
 from django import forms
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
-from webshop.models import Product
+from webshop.models import Product, Manufacturer, Category
 
 
 class AddProductForm(forms.ModelForm):
@@ -37,5 +38,27 @@ class EditProductForm(forms.ModelForm):
         self.helper.form_method = 'post'
         self.helper.add_input(Submit('submit', 'Submit'))
 
+
+class AddManufacturerForm(BSModalModelForm):
+
+    class Meta:
+        model = Manufacturer
+        fields = '__all__'
+        widgets = {
+            'name': forms.TextInput(attrs={'placeholder': 'Manufacturer name...'}),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super(AddManufacturerForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_tag = False
+        self.helper.form_method = 'post'
+
+
+class AddCategoryForm(forms.ModelForm):
+
+    class Meta:
+        model = Category
+        fields = '__all__'
 
 

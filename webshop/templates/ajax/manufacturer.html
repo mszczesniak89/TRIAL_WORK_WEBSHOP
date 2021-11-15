@@ -1,0 +1,11 @@
+<select name="manufacturer" required id="id_manufacturer">
+    <option value="" selected>---------</option>
+    {% for object in objects %}
+    <option value="{{ object.id }}">{{ object.name}}</option>
+    {%  endfor %}
+</select>
+<div class="input-group-append">
+    <button class="btn btn-outline-dark" id="create-manufacturer"
+            type="button">
+        <i class="far fa-plus-square"></i></button>
+</div>

@@ -1,3 +1,4 @@
+from bootstrap_modal_forms.generic import BSModalCreateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.forms import model_to_dict
 from django.http import JsonResponse
@@ -8,9 +9,9 @@ from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import DetailView, ListView, CreateView, DeleteView, UpdateView
 from django_filters.views import FilterView
-from webshop.models import Product, ShoppingCart, ShoppingCartItems
+from webshop.models import Product, ShoppingCart, ShoppingCartItems, Manufacturer, Category
 from webshop.filters import ProductFilter
-from webshop.forms import AddProductForm, EditProductForm
+from webshop.forms import AddProductForm, EditProductForm, AddCategoryForm, AddManufacturerForm
 
 
 class HomePageView(View):
@@ -77,6 +78,21 @@ class AdminDeleteProduct(UserPassesTestMixin, DeleteView):
 
     def test_func(self):
         return self.request.user.is_staff
+
+
+class ManufacturerCreateModalView(UserPassesTestMixin, BSModalCreateView):
+    template_name = 'webshop/create_manufacturer_modal.html'
+    form_class = AddManufacturerForm
+    success_url = reverse_lazy('main-page')
+
+    def test_func(self):
+        return self.request.user.is_staff
+
+    # def form_valid(self, form):
+    #     if not self.request.headers.get('x-requested-with') == 'XMLHttpRequest':
+    #         return super().form_valid(form)
+    #     else:
+    #         return super().form_invalid(form)
 
 
 def add_to_cart(request):
@@ -150,3 +166,11 @@ def update_cart_item(request):
                             {'cart_data': request.session['cartdata'], 'totalitems': len(request.session['cartdata']),
                              'total_amt': total_amt})
     return JsonResponse({'data': data, 'totalitems': len(request.session['cartdata'])})
+
+
+def manufacturers(request):
+    data = dict()
+    if request.method == 'GET':
+        objects = Manufacturer.objects.all()
+        data['table'] = render_to_string('ajax/manufacturer.html', {'objects': objects},  request=request)
+        return JsonResponse(data)

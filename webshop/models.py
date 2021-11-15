@@ -25,7 +25,7 @@ class Manufacturer(models.Model):
     image = models.ImageField(upload_to="manufacturer_images/")
 
     class Meta:
-        verbose_name_plural = '2. Brands'
+        verbose_name_plural = '2. Manufacturers'
 
     def __str__(self):
         return self.name

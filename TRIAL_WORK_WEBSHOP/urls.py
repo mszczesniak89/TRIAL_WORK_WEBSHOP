@@ -19,7 +19,7 @@ from django.urls import path, include
 from django.conf.urls.static import static
 from webshop.views import HomePageView, MainShopView, ProductDetailsView, add_to_cart, shopping_cart_list, \
     delete_cart_item, update_cart_item, AddProductView, AdminProductView, AdminDeleteProduct, AdminEditProduct, \
-    ManufacturerCreateModalView, manufacturers
+    ManufacturerCreateModalView, manufacturers, CategoryCreateModalView, categories
 
 
 urlpatterns = [
@@ -32,7 +32,9 @@ urlpatterns = [
     path('admin_delete_product/<int:pk>/', AdminDeleteProduct.as_view(), name='admin-delete-product'),
     path('admin_edit_product/<int:pk>/', AdminEditProduct.as_view(), name='admin-edit-product'),
     path('add_manufacturer/', ManufacturerCreateModalView.as_view(), name='manufacturer-modal'),
+    path('add_category/', CategoryCreateModalView.as_view(), name='category-modal'),
     path('manufacturers/', manufacturers, name='manufacturers'),
+    path('categories/', categories, name='categories'),
     path('product/<int:pk>/', ProductDetailsView.as_view(), name='product-details'),
     path('add-product/', AddProductView.as_view(), name='add-product'),
     path('add-to-cart', add_to_cart, name='add-to-cart'),

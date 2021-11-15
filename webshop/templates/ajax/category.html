@@ -1,4 +1,9 @@
-{{ form.category }}
+<select name="category" required id="id_category">
+    <option value="" selected>---------</option>
+    {% for object in objects %}
+    <option value="{{ object.id }}">{{ object.name }}</option>
+    {% endfor %}
+</select>
 <div class="input-group-append">
     <button class="btn btn-outline-dark" id="create-category"
             type="button">

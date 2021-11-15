@@ -95,6 +95,21 @@ class ManufacturerCreateModalView(UserPassesTestMixin, BSModalCreateView):
     #         return super().form_invalid(form)
 
 
+class CategoryCreateModalView(UserPassesTestMixin, BSModalCreateView):
+    template_name = 'webshop/create_category_modal.html'
+    form_class = AddCategoryForm
+    success_url = reverse_lazy('main-page')
+
+    def test_func(self):
+        return self.request.user.is_staff
+
+    # def form_valid(self, form):
+    #     if not self.request.headers.get('x-requested-with') == 'XMLHttpRequest':
+    #         return super().form_valid(form)
+    #     else:
+    #         return super().form_invalid(form)
+
+
 def add_to_cart(request):
     cart_p = {str(request.GET['item_id']): {
         'qty': request.GET['qty'],
@@ -173,4 +188,12 @@ def manufacturers(request):
     if request.method == 'GET':
         objects = Manufacturer.objects.all()
         data['table'] = render_to_string('ajax/manufacturer.html', {'objects': objects},  request=request)
+        return JsonResponse(data)
+
+
+def categories(request):
+    data = dict()
+    if request.method == 'GET':
+        objects = Category.objects.all()
+        data['table'] = render_to_string('ajax/category.html', {'objects': objects},  request=request)
         return JsonResponse(data)

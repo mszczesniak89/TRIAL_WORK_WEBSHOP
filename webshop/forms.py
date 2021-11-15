@@ -55,10 +55,19 @@ class AddManufacturerForm(BSModalModelForm):
         self.helper.form_method = 'post'
 
 
-class AddCategoryForm(forms.ModelForm):
+class AddCategoryForm(BSModalModelForm):
 
     class Meta:
         model = Category
         fields = '__all__'
+        widgets = {
+            'name': forms.TextInput(attrs={'placeholder': 'Category name...'}),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super(AddCategoryForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_tag = False
+        self.helper.form_method = 'post'
 
 

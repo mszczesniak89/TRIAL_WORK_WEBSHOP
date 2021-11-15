@@ -54,7 +54,7 @@
                         <tr>
                             <th>Category</th>
                             <td>
-                                <div class="input-group mb-1">
+                                <div class="input-group mb-1" id="category-div">
                                     {{ form.category }}
                                     <div class="input-group-append">
                                         <button class="btn btn-outline-dark" id="create-category"
@@ -99,7 +99,7 @@
           "<div "+
           "style='position:fixed;top:0;z-index:10000;width:100%;border-radius:0;' "+
           "class='alert alert-icon alert-success alert-dismissible fade show mb-0' role='alert'>"+
-          "Success: Book was updated."+
+          "Success: Manufacturer was added"+
           "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>"+
           "<span aria-hidden='true'>&times;</span>"+
           "</button>"+
@@ -124,6 +124,41 @@
           });
         }
         AddManufacturerModal();
+    });
+</script>
+<script type="text/javascript">
+    $(function () {
+        let asyncSuccessMessage =
+            "<div " +
+            "style='position:fixed;top:0;z-index:10000;width:100%;border-radius:0;' " +
+            "class='alert alert-icon alert-success alert-dismissible fade show mb-0' role='alert'>" +
+            "Success: Category was added." +
+            "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>" +
+            "<span aria-hidden='true'>&times;</span>" +
+            "</button>" +
+            "</div>" +
+            "<script>" +
+            "$('.alert').fadeTo(2000, 500).slideUp(500, function () {$('.alert').slideUp(500).remove();});" +
+            "<\/script>";
+
+        function AddCategoryModal() {
+            $("#create-category").each(function () {
+                $(this).modalForm({
+                    formURL: "{% url 'category-modal' %}",
+                    asyncUpdate: true,
+                    asyncSettings: {
+                        closeOnSubmit: true,
+                        successMessage: asyncSuccessMessage,
+                        dataUrl: '{% url 'categories' %}',
+                        dataElementId: "#category-div",
+                        dataKey: "table",
+                        addModalFormFunction: AddCategoryModal
+                    }
+                });
+            });
+        }
+
+        AddCategoryModal();
     });
 </script>
 {% endblock %}

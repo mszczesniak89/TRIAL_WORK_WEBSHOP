@@ -18,7 +18,7 @@ from decouple import config
 import django_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-from django.conf.global_settings import DATABASES
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -88,15 +88,15 @@ WSGI_APPLICATION = 'TRIAL_WORK_WEBSHOP.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': config('DB_NAME'),
-#         'USER': config('DB_USER'),
-#         'PASSWORD': config('DB_PASS'),
-#         'HOST': config('DB_HOST'),
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASS'),
+        'HOST': config('DB_HOST'),
+    }
+}
 
 
 # Password validation
@@ -175,4 +175,4 @@ DEFAULT_FROM_EMAIL = 'mszczesniak89@gmail.com'
 
 # Heroku: Update database configuration from $DATABASE_URL.
 db_from_env = dj_database_url.config(conn_max_age=500)
-# DATABASES['default'].update(db_from_env)
+DATABASES['default'].update(db_from_env)

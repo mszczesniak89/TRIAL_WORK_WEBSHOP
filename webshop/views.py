@@ -138,7 +138,6 @@ def add_to_cart(request):
 
 def shopping_cart_list(request):
     total_amt = 0
-    object_list = {}
     if 'cartdata' in request.session:
         for p_id, item in request.session['cartdata'].items():
             product = Product.objects.filter(id=p_id).values()
@@ -193,7 +192,7 @@ def manufacturers(request):
     data = dict()
     if request.method == 'GET':
         objects = Manufacturer.objects.all()
-        data['table'] = render_to_string('ajax/manufacturer.html', {'objects': objects},  request=request)
+        data['table'] = render_to_string('ajax/manufacturer.html', {'objects': objects}, request=request)
         return JsonResponse(data)
 
 
@@ -201,5 +200,5 @@ def categories(request):
     data = dict()
     if request.method == 'GET':
         objects = Category.objects.all()
-        data['table'] = render_to_string('ajax/category.html', {'objects': objects},  request=request)
+        data['table'] = render_to_string('ajax/category.html', {'objects': objects}, request=request)
         return JsonResponse(data)

@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block zawartosc %}
 
     <div class="container h-100">
@@ -34,16 +35,18 @@
                 </div>
 
                 <div class="d-flex justify-content-center mt-3">
-                    <a class="nav-item nav-link p-0" href="{% url 'main-page' %}">
-                        <h6>BACK TO MAIN PAGE</h6>
+                    <a class="nav-item nav-link p-0" href="" id="refURL">
+                        <h6>BACK</h6>
                     </a>
                 </div>
                 {{ form.errors }}
             </div>
         </div>
     </div>
-    </div>
-
-
 
 {% endblock %}
+
+{% block javascript %}
+    <script src="{% static 'js/back-button.js' %}"></script>
+{% endblock %}
+

@@ -110,6 +110,12 @@ class CategoryCreateModalView(UserPassesTestMixin, BSModalCreateView):
     #         return super().form_invalid(form)
 
 
+class CheckoutView(View):
+    def get(self, request):
+        response = render(request, 'webshop/checkout.html', )
+        return response
+
+
 def add_to_cart(request):
     cart_p = {str(request.GET['item_id']): {
         'qty': request.GET['qty'],

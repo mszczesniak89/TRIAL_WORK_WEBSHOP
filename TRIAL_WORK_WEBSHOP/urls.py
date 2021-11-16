@@ -19,7 +19,7 @@ from django.urls import path, include
 from django.conf.urls.static import static
 from webshop.views import HomePageView, MainShopView, ProductDetailsView, add_to_cart, shopping_cart_list, \
     delete_cart_item, update_cart_item, AddProductView, AdminProductView, AdminDeleteProduct, AdminEditProduct, \
-    ManufacturerCreateModalView, manufacturers, CategoryCreateModalView, categories
+    ManufacturerCreateModalView, manufacturers, CategoryCreateModalView, categories, CheckoutView
 
 
 urlpatterns = [
@@ -27,7 +27,7 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('', HomePageView.as_view(), name='home-page'),
-    path('main', MainShopView.as_view(), name='main-page'),
+    path('main/', MainShopView.as_view(), name='main-page'),
     path('admin_products/', AdminProductView.as_view(), name='admin-products'),
     path('admin_delete_product/<int:pk>/', AdminDeleteProduct.as_view(), name='admin-delete-product'),
     path('admin_edit_product/<int:pk>/', AdminEditProduct.as_view(), name='admin-edit-product'),
@@ -37,10 +37,11 @@ urlpatterns = [
     path('categories/', categories, name='categories'),
     path('product/<int:pk>/', ProductDetailsView.as_view(), name='product-details'),
     path('add-product/', AddProductView.as_view(), name='add-product'),
-    path('add-to-cart', add_to_cart, name='add-to-cart'),
-    path('update-cart', update_cart_item, name='update-cart'),
-    path('delete-from-cart', delete_cart_item, name='delete-from-cart'),
-    path('shopping_cart', shopping_cart_list, name='shopping-cart'),
+    path('add-to-cart/', add_to_cart, name='add-to-cart'),
+    path('update-cart/', update_cart_item, name='update-cart'),
+    path('delete-from-cart/', delete_cart_item, name='delete-from-cart'),
+    path('shopping_cart/', shopping_cart_list, name='shopping-cart'),
+    path('checkout/', CheckoutView.as_view(), name='checkout'),
 ]
 
 if settings.DEBUG:

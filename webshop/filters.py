@@ -12,7 +12,7 @@ from webshop.models import Product, ShoppingCart, ShoppingCartItems
 
 class ProductFilter(django_filters.FilterSet):
     q = django_filters.CharFilter(method='my_custom_filter', label='SEARCH',
-                                  widget=forms.TextInput(attrs={'size': 22, 'placeholder': 'insert name/product code'}))
+                                  widget=forms.TextInput(attrs={'size': 25, 'placeholder': 'insert name/product code'}))
     o = OrderingFilter(
         fields=(
             ('name', 'name'),

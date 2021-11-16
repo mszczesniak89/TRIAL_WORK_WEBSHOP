@@ -20,6 +20,12 @@ class HomePageView(View):
         return response
 
 
+class ContactView(View):
+    def get(self, request):
+        response = render(request, 'webshop/contact.html', )
+        return response
+
+
 class MainShopView(FilterView):
     def get_queryset(self):
         return Product.objects.all()

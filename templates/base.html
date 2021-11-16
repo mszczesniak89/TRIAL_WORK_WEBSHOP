@@ -46,10 +46,10 @@
                     <a class="nav-link text-uppercase" href="{% url 'main-page' %}"><h3 class="menu">SHOP</h3></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-uppercase" href=""><h3 class="menu">Contact</h3></a>
+                    <a class="nav-link text-uppercase" href="{% url 'contact-page' %}"><h3 class="menu">Contact</h3></a>
                 </li>
                 {% if user.is_staff %}
-                <li class="nav-item">
+                    <li class="nav-item">
                     <a class="nav-link text-uppercase" href="{% url 'admin-products' %}"><h3 class="menu">Admin</h3>
                     </a>
                 {% endif %}
@@ -67,13 +67,13 @@
                         <a class="nav-link text-uppercase" href="{% url 'logout' %}"><h3 class="menu">Logout</h3></a>
                     </li>
                 {% endif %}
-                <li  class="nav-item">
-                     <a class="nav-link" href="{% url 'shopping-cart' %}">
-                         <h3 class="menu">
-                    <i class="fas fa-shopping-cart fa-md"></i>
-                         (<span class="cart-list">{{request.session.cartdata|length}}</span>)
-                             </h3>
-                     </a>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'shopping-cart' %}">
+                        <h3 class="menu">
+                            <i class="fas fa-shopping-cart fa-md"></i>
+                            (<span class="cart-list">{{ request.session.cartdata|length }}</span>)
+                        </h3>
+                    </a>
                 </li>
             </ul>
 
@@ -116,7 +116,7 @@
 <footer class="footer bg-light">
     <div class="container">
         <div class="row align-items-center">
-            <div  class="col-lg-4 text-lg-start">
+            <div class="col-lg-4 text-lg-start">
             </div>
             <div class="col-lg-4 my-3 my-lg-0">
                 <div style="color:#424242; font-family:'Mohave';">

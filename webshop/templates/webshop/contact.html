@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block zawartosc %}
+
+    <div class="container">
+        <div class="d-flex justify-content-center">
+            <div class="bg-light p-2 rounded-3 shadow-lg px-xxl-5 mt-xl-5" style="--bs-bg-opacity: .7;">
+                <div class="card-body text-center">
+                    <h1 class="card-title">CONTACT</h1>
+                    <p>
+                    <p><h4 class="card-text"><a class="nav-item nav-link"
+                                                href="mailto: info@trialwebshop.com">
+                    info@trialwebshop.com</a></h4>
+                    <p><h4 class="card-text">ul. Dabrowskiego 10</h4>
+                    <p><h4 class="card-text">60-839 Poznań</h4>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <a class="nav-item nav-link p-0" href="" id="refURL">
+                        <h6>BACK</h6>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascript %}
+    <script src="{% static 'js/back-button.js' %}"></script>
+{% endblock %}
+

@@ -1,6 +1,8 @@
 from .models import Product
 from django.db.models import Min, Max
 
+# FOR FUTURE USE
+
 
 def get_filters(request):
     categories = Product.objects.distinct().values('category__name', 'category__id')

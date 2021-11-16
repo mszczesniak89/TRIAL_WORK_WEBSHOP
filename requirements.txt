@@ -1,18 +1,26 @@
 asgiref==3.4.1
+boto3==1.20.6
+botocore==1.23.6
 dj-database-url==0.5.0
 Django==3.2.9
+-e git+https://github.com/mszczesniak89/django-bootstrap-modal-forms.git@6383f67f923e64b7c1581bd5cbe6cd7ee8a547f3#egg=django_bootstrap_modal_forms
 django-braces==1.15.0
 django-crispy-forms==1.13.0
 django-filter==21.1
 django-heroku==0.3.1
 django-recaptcha==2.0.6
--e git+https://github.com/mszczesniak89/django-bootstrap-modal-forms.git@6383f67f923e64b7c1581bd5cbe6cd7ee8a547f3#egg=django_bootstrap_modal_forms
+django-storages==1.12.3
 gunicorn==20.1.0
+jmespath==0.10.0
 jsonpickle==2.0.0
 mysqlclient==2.0.3
 Pillow==8.4.0
 psycopg2==2.9.2
+python-dateutil==2.8.2
 python-decouple==3.5
 pytz==2021.3
+s3transfer==0.5.0
+six==1.16.0
 sqlparse==0.4.2
+urllib3==1.26.7
 whitenoise==5.3.0

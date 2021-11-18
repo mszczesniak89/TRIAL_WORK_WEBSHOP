@@ -176,7 +176,7 @@ EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'mszczesniak89@gmail.com'
 
 # Heroku: Update database configuration from $DATABASE_URL.
-db_from_env = dj_database_url.config(conn_max_age=500)
+db_from_env = dj_database_url.config(conn_max_age=60)
 DATABASES['default'].update(db_from_env)
 
 AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')

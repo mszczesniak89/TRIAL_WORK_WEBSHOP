@@ -14,4 +14,9 @@
  ╚══╝╚══╝ ╚══════╝╚═════╝ ╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚═╝     
 ```                                                          
 
+*This is a test WebShop.
+This project is primarily Django-based.
+With a pinch of JavaScript.
+And a sliver of AJAX.*
+
 **TRY IT OUT HERE: https://mszczesniak-trial-work-webshop.herokuapp.com/**
